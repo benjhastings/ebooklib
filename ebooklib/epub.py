@@ -1261,7 +1261,10 @@ class EpubReader(EpubParser):
 
     def read_file(self, name):
         # Raises KeyError
-        return self.zf.read(name)
+        try:
+            return self.zf.read(name)
+        except KeyError:
+            return ''
 
     def _load_container(self):
         meta_inf = self.read_file('META-INF/container.xml')
